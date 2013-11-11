@@ -1,10 +1,20 @@
 ## PHPExcel Wrapper for Laravel 4
 
-	
-
 ### Installation
+
+Require package via composer.json
+
+	"rozklad/laravel-phpexcel": "dev-master"
+
+Run composer update
 	
-	'Rozklad\PHPExcel\ServiceProvider',
+	$ composer update
+
+Open __app/config/app.php___ and add ServiceProvider to 'providers' array
+
+		'Rozklad\PHPExcel\ServiceProvider',
+
+Optionally add to aliases
 
 	'Excel'           => 'Rozklad\PHPExcel\Facade',
 
