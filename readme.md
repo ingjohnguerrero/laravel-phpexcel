@@ -2,19 +2,19 @@
 
 ### Installation
 
-Require package via composer.json
+1) Require package via composer.json
 
 	"rozklad/laravel-phpexcel": "dev-master"
 
-Run composer update
+2) Run composer update
 	
 	$ composer update
 
-Open __app/config/app.php___ and add ServiceProvider to 'providers' array
+3) Open __app/config/app.php__ and add ServiceProvider to 'providers' array
 
-		'Rozklad\PHPExcel\ServiceProvider',
+	'Rozklad\PHPExcel\ServiceProvider',
 
-Optionally add to aliases
+4) Optionally add to aliases
 
 	'Excel'           => 'Rozklad\PHPExcel\Facade',
 
