@@ -20,10 +20,23 @@
 
 ### Usage
 
+Create Excel xls file from array
+
 	Excel::fromArray( array(
 		array('1', '2', '3'),
 		array('X', 'Y', 'Z')
 	) )->save( base_path() . '/sample.xls' );
+
+Create Excel xlsx file from array
+
+	Excel::fromArray( array(
+		array('Hello', 'World', '!!!'),
+		array('X', 'Y', 'Z')
+	) )->save( base_path() . '/sample.xlsx' );
+
+Create array from Excel file
+
+	Excel::excel2Array( base_path() . '/sample.xls' );
 
 ### License
 
