@@ -17,7 +17,7 @@ class Excel {
 
 	public function __construct() 
 	{
-		$vendor_file = base_path() . '/workbench/rozklad/laravel-phpexcel/vendor/phpoffice/phpexcel/Classes/PHPExcel.php';
+		$vendor_file = base_path() . '/vendor/phpoffice/phpexcel/Classes/PHPExcel.php';
 
 		if ( file_exists( $vendor_file ) )
 			require_once $vendor_file;
