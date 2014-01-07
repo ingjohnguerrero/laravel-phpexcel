@@ -62,21 +62,25 @@ class Excel {
 		} catch(Exception $e) {
 			App::abort('500', "Error loading file ".pathinfo($filepath,PATHINFO_BASENAME).": ".$e->getMessage());
 		}
-
-		// Get worksheet dimensions
-		$sheet = $objPHPExcel->getSheet(0); 
-		$highestRow = $sheet->getHighestRow(); 
-		$highestColumn = $sheet->getHighestColumn();
-
-		// Loop through each row of the worksheet in turn
-		for ($row = 1; $row <= $highestRow; $row++){ 
-    		// Read a row of data into an array
-			$rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
-				NULL,
-				TRUE,
-				FALSE);
-			$result[] = $rowData;
-		}
+        
+        $i = 0;
+        // Loop through each worksheet
+        foreach ($objPHPExcel->getWorksheetIterator() as $sheet) {
+            // Get worksheet dimensions
+            $highestRow = $sheet->getHighestRow(); 
+            $highestColumn = $sheet->getHighestColumn();
+            
+            // Loop through each row of the worksheet in turn
+            for ($row = 1; $row <= $highestRow; $row++){ 
+                // Read a row of data into an array
+                $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
+                    NULL,
+                    TRUE,
+                    FALSE);
+                $result[$i][] = $rowData;
+            }
+            $i++;
+        }
 
 		return $result;
     }
