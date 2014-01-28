@@ -1,5 +1,5 @@
 <?php 
-namespace Rozklad\PHPExcel;
+namespace Lightshire\PHPExcel;
 
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 
