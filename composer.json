@@ -4,14 +4,14 @@
     "keywords": ["laravel", "excel", "phpexcel", "xls", "xlsx"],
     "authors": [
         {
-            "name": "rozklad",
-            "email": "jan.rozklad@gmail.com"
+            "name": "lightshire",
+            "email": "giansantillan18@gmail.com"
         }
     ],
     "require": {
         "php": ">=5.3.0",
         "illuminate/support": "4.x",
-        "phpoffice/phpexcel": "1.7.9"
+        "phpoffice/phpexcel": "1.7.9-dev"
     },
     "autoload": {
         "psr-0": {
