@@ -11,11 +11,11 @@
     "require": {
         "php": ">=5.3.0",
         "illuminate/support": "4.x",
-        "phpoffice/phpexcel": "1.7.9-dev"
+        "phpoffice/phpexcel": "1.7.9"
     },
     "autoload": {
         "psr-0": {
-            "Rozklad\\PHPExcel\\": "src/"
+            "Lightshire\\PHPExcel\\": "src/"
         }
     },
     "minimum-stability": "dev"
