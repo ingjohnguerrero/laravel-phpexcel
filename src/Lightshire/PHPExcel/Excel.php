@@ -97,12 +97,12 @@ class Excel {
     	}
 
     	$rawData 	= $csv[0]; //get raw data
-    	$columns 	= $rawData[0]; //get first array
+    	$columns 	= $rawData[0][0]; //get first array
 
    		for($i = 1; $i < count($rawData); $i++) {
    			//start from the first data
-   			for($index = 0; $i < count($columns); $index++) {
-   				$result[$columns[$index]] = $rawData[$index];
+   			for($index = 0; $index < count($columns); $index++) {
+   				$result[strtolower($columns[$index])] = $rawData[$i][0][$index];
    			}
    		}
    		return $result;
