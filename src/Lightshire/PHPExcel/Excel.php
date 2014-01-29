@@ -24,7 +24,7 @@ class Excel {
 		else
 			App::abort('500', "$vendor_file cannot be loaded, please run composer update to get the required phpoffice/phpexcel package");
 	
-		return $this->phpexcel;
+		return $this->phpexcel; 
 	}
 
 	protected function init()
@@ -102,7 +102,7 @@ class Excel {
    		for($i = 1; $i < count($rawData); $i++) {
    			//start from the first data
    			for($index = 0; $index < count($columns); $index++) {
-   				$result[strtolower($columns[$index])] = $rawData[$i][0][$index];
+   				$result[$i][strtolower($columns[$index])] = $rawData[$i][0][$index];
    			}
    		}
    		return $result;
