@@ -48,7 +48,7 @@ class Excel {
      * @param  array  $result   [description]
      * @return [type]           [description]
      */
-    public function excel2Array( $filepath = null, $result = array() )
+    public function excel2Array( $filepath = null )
     {
     	if ( !file_exists( $filepath ) ) {
     		App::abort('500', "Error loading file ".$filepath.": File does not exist");
@@ -83,6 +83,29 @@ class Excel {
         }
 
 		return $result;
+    }
+
+    public function csvToArray($filePath = null) {
+    	$csv 		= $this->excel2Array($filePath);
+    	$columns 	= array();
+    	$result 	= array();
+    	$rawData 	= array();
+
+
+    	if(count($csv) == 0 || count($csv[0]) == 0) {
+    		return null;
+    	}
+
+    	$rawData 	= $csv[0]; //get raw data
+    	$columns 	= $rawData[0]; //get first array
+
+   		for($i = 1; $i < count($rawData); $i++) {
+   			//start from the first data
+   			for($index = 0; $i < count($columns); $index++) {
+   				$result[$columns[$index]] = $rawData[$index];
+   			}
+   		}
+   		return $result;
     }
 
     /**
