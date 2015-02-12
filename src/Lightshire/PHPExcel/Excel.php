@@ -1,5 +1,5 @@
 <?php 
-namespace Rozklad\PHPExcel;
+namespace Lightshire\PHPExcel;
 
 use App;
 use Config;
@@ -24,7 +24,7 @@ class Excel {
 		else
 			App::abort('500', "$vendor_file cannot be loaded, please run composer update to get the required phpoffice/phpexcel package");
 	
-		return $this->phpexcel;
+		return $this->phpexcel; 
 	}
 
 	protected function init()
@@ -48,7 +48,7 @@ class Excel {
      * @param  array  $result   [description]
      * @return [type]           [description]
      */
-    public function excel2Array( $filepath = null, $result = array() )
+    public function excel2Array( $filepath = null )
     {
     	if ( !file_exists( $filepath ) ) {
     		App::abort('500', "Error loading file ".$filepath.": File does not exist");
@@ -62,23 +62,50 @@ class Excel {
 		} catch(Exception $e) {
 			App::abort('500', "Error loading file ".pathinfo($filepath,PATHINFO_BASENAME).": ".$e->getMessage());
 		}
-
-		// Get worksheet dimensions
-		$sheet = $objPHPExcel->getSheet(0); 
-		$highestRow = $sheet->getHighestRow(); 
-		$highestColumn = $sheet->getHighestColumn();
-
-		// Loop through each row of the worksheet in turn
-		for ($row = 1; $row <= $highestRow; $row++){ 
-    		// Read a row of data into an array
-			$rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
-				NULL,
-				TRUE,
-				FALSE);
-			$result[] = $rowData;
-		}
+        
+        $i = 0;
+        // Loop through each worksheet
+        foreach ($objPHPExcel->getWorksheetIterator() as $sheet) {
+            // Get worksheet dimensions
+            $highestRow = $sheet->getHighestRow(); 
+            $highestColumn = $sheet->getHighestColumn();
+            
+            // Loop through each row of the worksheet in turn
+            for ($row = 1; $row <= $highestRow; $row++){ 
+                // Read a row of data into an array
+                $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
+                    NULL,
+                    TRUE,
+                    FALSE);
+                $result[$i][] = $rowData;
+            }
+            $i++;
+        }
 
 		return $result;
+    }
+
+    public function csvToArray($filePath = null) {
+    	$csv 		= $this->excel2Array($filePath);
+    	$columns 	= array();
+    	$result 	= array();
+    	$rawData 	= array();
+
+
+    	if(count($csv) == 0 || count($csv[0]) == 0) {
+    		return null;
+    	}
+
+    	$rawData 	= $csv[0]; //get raw data
+    	$columns 	= $rawData[0][0]; //get first array
+
+   		for($i = 1; $i < count($rawData); $i++) {
+   			//start from the first data
+   			for($index = 0; $index < count($columns); $index++) {
+   				$result[$i][strtolower($columns[$index])] = $rawData[$i][0][$index];
+   			}
+   		}
+   		return $result;
     }
 
     /**

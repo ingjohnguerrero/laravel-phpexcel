@@ -4,7 +4,7 @@
 
 1) Require package via composer.json
 
-	"rozklad/laravel-phpexcel": "dev-master"
+	lightshire/laravel-phpexcel-wrapper
 
 2) Run composer update
 	
@@ -12,11 +12,11 @@
 
 3) Open __app/config/app.php__ and add ServiceProvider to 'providers' array
 
-	'Rozklad\PHPExcel\ServiceProvider',
+	'Lightshire\PHPExcel\ServiceProvider',
 
 4) Optionally add to aliases
 
-	'Excel'           => 'Rozklad\PHPExcel\Facade',
+	'Excel'           => 'Lightshire\PHPExcel\Facade',
 
 ### Usage
 
